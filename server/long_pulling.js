@@ -1,9 +1,9 @@
 const express = require('express')
 const cors = require('cors')
-const events = require('events')
+const EventEmitter = require('node:events')
 
 const PORT = 5000
-const emitter = events.EventEmitter()
+const emitter = new EventEmitter()
 const app = express()
 app.use(cors())
 
