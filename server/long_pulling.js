@@ -3,9 +3,7 @@ const cors = require('cors')
 const events = require('events')
 
 const PORT = 5000
-
 const emitter = events.EventEmitter()
-
 const app = express()
 app.use(cors())
 
