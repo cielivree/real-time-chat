@@ -16,7 +16,7 @@ app.get('/connect', (request, response) => {
    })
 
     emitter.on('newMessage', (message) => {
-       response.write(message)
+       response.write(`${message}`)
    })
 })
 
