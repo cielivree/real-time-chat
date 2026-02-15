@@ -12,7 +12,8 @@ const LongPulling = () => {
     const subscribe = async () => {
         const eventSource = new EventSource('http://localhost:5000/connect')
         eventSource.onmessage = function (event) {
-            console.log(event.data)
+            const message = JSON.parse(event.data)
+            setMessages(prev => [message, ...prev])
         }
     }
 
@@ -35,9 +36,9 @@ const LongPulling = () => {
                 <button onClick={sendMessage}>Send</button>
             </div>
             <div className="messages">
-                {messages.map(message => 
-                    <div className='message' key={message.id}>
-                        {message.message} 
+                {messages.map(mes => 
+                    <div className='message' key={mes.id}>
+                        {mes.message} 
                     </div>
                 )}
             </div>
