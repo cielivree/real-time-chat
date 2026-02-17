@@ -1,21 +1,30 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import axios from 'axios'
 
-const LongPulling = () => {
+const WebSocket = () => {
     const [messages, setMessages] = useState([])
     const [value, setValue] = useState('')
+    const socket = useRef()
 
     useEffect(() => {
-        subscribe()
-    }, [])
+        socket.current = new WebSocket('ws://localhost:5000')
+        
+        socket.current.onopen = () => {
 
-    const subscribe = async () => {
-        const eventSource = new EventSource('http://localhost:5000/connect')
-        eventSource.onmessage = function (event) {
-            const message = JSON.parse(event.data)    // convert string back into the object
-            setMessages(prev => [message, ...prev])
         }
-    }
+
+        socket.current.onmessage = () => {
+            
+        }
+
+        socket.current.onclose = () => {
+
+        }
+
+        socket.current.onerror = () => {
+            
+        }
+    }, [])
 
     const sendMessage = async () => {
         await axios.post('http://localhost:5000/new-messages', {
