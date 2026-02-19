@@ -5,12 +5,14 @@ const WebSocket = () => {
     const [messages, setMessages] = useState([])
     const [value, setValue] = useState('')
     const socket = useRef()
+    const [connected, setConnected] = useState(false)
+    const [username, setUsername] = useState('')
 
     useEffect(() => {
         socket.current = new WebSocket('ws://localhost:5000')
         
         socket.current.onopen = () => {
-
+            setConnected(true)
         }
 
         socket.current.onmessage = () => {
@@ -18,11 +20,11 @@ const WebSocket = () => {
         }
 
         socket.current.onclose = () => {
-
+            console.log('Socket has closed.')
         }
 
         socket.current.onerror = () => {
-            
+            console.log('Socket error!')
         }
     }, [])
 
@@ -31,6 +33,22 @@ const WebSocket = () => {
             message: value,
             id: Date.now()
         })
+    }
+
+    if (!connected) {
+        return (
+            <div className="center">
+                <div className="form">
+                    <input
+                        type="text"
+                        placeholder="Your name"
+                        value={value}
+                        onChange={e => setUsername(e.target.value)}
+                    />
+                    <button>Log In</button>
+                </div>
+            </div>
+        )
     }
 
   return (
