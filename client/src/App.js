@@ -1,10 +1,10 @@
 import './App.css'
-import EventSourcing from './EventSourcing';
+import Websocket from './WebSocket';
 
 function App() {
   return (
     <div>
-      <EventSourcing />
+      <Websocket />
     </div>
   );
 }

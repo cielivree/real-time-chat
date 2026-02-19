@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import axios from 'axios'
 
-const WebSocket = () => {
+const Websocket = () => {
     const [messages, setMessages] = useState([])
     const [value, setValue] = useState('')
     const socket = useRef()
@@ -9,7 +9,7 @@ const WebSocket = () => {
     const [username, setUsername] = useState('')
 
     useEffect(() => {
-        socket.current = new WebSocket('ws://localhost:5000')
+        socket.current = new WebSocket("ws://localhost:5000")
         
         socket.current.onopen = () => {
             setConnected(true)
@@ -74,4 +74,4 @@ const WebSocket = () => {
   )
 }
 
-export default LongPulling
+export default Websocket
