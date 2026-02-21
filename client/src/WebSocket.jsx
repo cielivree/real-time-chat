@@ -8,7 +8,7 @@ const Websocket = () => {
     const [connected, setConnected] = useState(false)
     const [username, setUsername] = useState('')
 
-    useEffect(() => {
+    function connect() {
         socket.current = new WebSocket("ws://localhost:5000")
         
         socket.current.onopen = () => {
@@ -26,7 +26,7 @@ const Websocket = () => {
         socket.current.onerror = () => {
             console.log('Socket error!')
         }
-    }, [])
+    }
 
     const sendMessage = async () => {
         await axios.post('http://localhost:5000/new-messages', {
@@ -45,7 +45,7 @@ const Websocket = () => {
                         value={value}
                         onChange={e => setUsername(e.target.value)}
                     />
-                    <button>Log In</button>
+                    <button onClick={connect}>Log In</button>
                 </div>
             </div>
         )
